@@ -1,0 +1,59 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "Formulario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Formulario</h2>
+
+<div class="container mt-4">
+    <h2 class="fw-bold">
+        @(Model.IdProducto > 0 ? "Editar Producto" : "Agregar Producto")
+    </h2>
+
+    @using (Html.BeginForm("Formulario", "Producto", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.IdProducto)
+
+        <div class="mb-3">
+            <label for="Nombre" class="form-label">Nombre</label>
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", placeholder = "Ingrese el nombre del Producto" })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+        </div>
+        <!--Descripcion-->
+        <div class="mb-3">
+            <label for="Descripcion" class="form-label">Descripcion</label>
+            @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control", placeholder = "Ingrese la descripcion" })
+            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+        </div>
+        <!--Precio-->
+        <div class="mb-3">
+            <label for="Precio" class="form-label">Precio</label>
+            @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", type = "number", step = "0.01", placeholder = "Ingrese el precio" })
+            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+        </div>
+        <!--Stock-->
+
+        <div class="mb-3">
+            <label for="Stock" class="form-label">Stock</label>
+            @Html.TextBoxFor(model => model.Stock, new { @class = "form-control", type = "number", placeholder = "Ingrese la cantidad en stock" })
+            @Html.ValidationMessageFor(model => model.Stock, "", new { @class = "text-danger" })
+        </div>
+        <!-- Categoría -->
+        <div class="mb-3">
+            <label for="Categoria" class="form-label">Categoría</label>
+            @Html.TextBoxFor(model => model.Categoria, new { @class = "form-control", placeholder = "Ingrese la categoría" })
+            @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
+        </div>
+
+      
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">
+                Guardar
+            </button>
+            <a href="@Url.Action("GetAll","Producto")" class="btn btn-secondary">
+                Cancelar
+            </a>
+        </div>
+    }
+</div>
